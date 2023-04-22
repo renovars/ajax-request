@@ -45,7 +45,7 @@ if ($password !== $repeatPassword) {
     errorLog("Пароли не совпадают\n");
 }
 foreach ($usersData as $user) {
-    if (isset($user[$email])) {
+    if ($user["email"] === $email) {
         errorLog("email уже зарегестрирован\n");
     }
 }

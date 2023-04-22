@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <title>Регистрация</title>
+</head>
+<body>
+    <div class="container text-center">
+      <form id="registrationForm" class="w-25 mx-auto">
+        <legend>Регистрация</legend>
+      	<div class="col">
+          <label for="inputName" class="form-label">Имя</label>
+          <input type="text" class="form-control" id="inputName">
+        </div>
+      	<div class="col">
+          <label for="inputSurname" class="form-label">Фамилия</label>
+          <input type="text" class="form-control" id="inputSurname">
+        </div>
+    	<div class="col">
+          <label for="inputEmail" class="form-label">E-mail</label>
+          <input type="email" class="form-control" id="inputEmail">
+        </div>
+        <div class="col">
+          <label for="inputPassword" class="form-label">Пароль</label>
+          <input type="password" class="form-control" id="inputPassword">
+        </div>
+    	 <div class="col">
+          <label for="inputRepeatPassword" class="form-label">Повтор пароля</label>
+          <input type="password" class="form-control" id="inputRepeatPassword">
+        </div>
+    	<div class="col-12">
+          <button type="button" id="sendForm" class="btn btn-primary mt-3">Отправить</button>
+        </div>
+      </form>
+    </div>
+</body>
+<div id="successRegistration" class="invisible flex-column text-center">
+  <p>Ваши данные успешно отправлены.</p>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="js/form-scripts.js"></script>
+</html>

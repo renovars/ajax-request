@@ -24,7 +24,7 @@ $email          = $_POST["email"];
 $password       = $_POST["password"];
 $repeatPassword = $_POST["repeatPassword"];
 
-function errorLog(string $messageText) : void
+function terminate(string $messageText) : void
 {
     $log = date('Y-m-d H:i:s') . " " . $messageText;
     $log = str_replace("\n", " ", $log);
@@ -36,17 +36,17 @@ function errorLog(string $messageText) : void
 $findMe = "@";
 $pos = strpos($email, $findMe);
 if ($pos === false) {
-    errorLog("Неправильный email\n");
+    terminate("Неправильный email\n");
 }
 if (!$password) {
-    errorLog("Пароль не введен\n");
+    terminate("Пароль не введен\n");
 }
 if ($password !== $repeatPassword) {
-    errorLog("Пароли не совпадают\n");
+    terminate("Пароли не совпадают\n");
 }
 foreach ($usersData as $user) {
     if ($user["email"] === $email) {
-        errorLog("email уже зарегестрирован\n");
+        terminate("email уже зарегестрирован\n");
     }
 }
-errorLog("success");
+terminate("success");

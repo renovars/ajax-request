@@ -22,6 +22,7 @@ $usersData = [
 //Errors
 $errors = [
     "invalidEmail"       => "Неправильный email\n",
+    "passwordIsEmpty"    => "Пароль не введен\n",
     "invalidPassword"    => "Пароли не совпадают\n",
     "emailAlreadyExists" => "email уже зарегестрирован\n"
 ];
@@ -30,25 +31,31 @@ $email          = $_POST["email"];
 $password       = $_POST["password"];
 $repeatPassword = $_POST["repeatPassword"];
 
-$error = "";
-
-//check email for @
-$findMe = "@";
-$pos = strpos($email, $findMe);
-if ($pos === false) {
-    $error = $errors["invalidEmail"];
-} elseif ($password !== $repeatPassword) { //check repeatPassword
-    $error = $errors["invalidPassword"];
-} else {
+try {
+    //check email for @
+    $findMe = "@";
+    $pos = strpos($email, $findMe);
+    if ($pos === false) {
+        throw new Exception($errors["invalidEmail"]);
+    }
+    if (!$password) {
+        throw new Exception($errors["passwordIsEmpty"]);
+    }
+    if ($password !== $repeatPassword) { //check repeatPassword
+        throw new Exception($errors["invalidPassword"]);
+    }
     foreach ($usersData as $user) {
         if ($user["email"] === $email) { //check email
-            $error = $errors["emailAlreadyExists"];
+            throw new Exception($errors["emailAlreadyExists"]);
         }
     }
+    $log = date('Y-m-d H:i:s') . " " . "Успешная регистрация";
+    file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
+    echo "success";
+
+} catch (Exception $e) {
+    $log = date('Y-m-d H:i:s') . " " . $e->getMessage();
+    $log = str_replace("\n", " ", $log);
+    file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
+    echo $e->getMessage();
 }
-
-$log = date('Y-m-d H:i:s') . " " . ($error ?: "Успешная регистрация");
-$log = str_replace("\n", " ", $log);
-file_put_contents(__DIR__ . '/log.txt', $log . PHP_EOL, FILE_APPEND);
-
-echo $error;

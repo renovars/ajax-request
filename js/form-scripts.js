@@ -18,7 +18,7 @@ document.querySelector("#sendForm").onclick = function()
     body: params
     }).then(response => response.text())
         .then(data => {
-            if (data === ""){
+            if (data === "success"){
                 $("#registrationForm").hide();
                 $("#successRegistration").removeClass('invisible');
             } else {
